@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Çiçek Sepeti</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #ffe0e9, #fff5f7);
+    text-align: center;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(45deg, #ff4d6d, #ff758f);
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+}
+
+/* NAV */
+nav {
+    background: white;
+    padding: 15px;
+}
+
+nav a {
+    margin: 0 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* SEPET BUTON */
+.cart-btn {
+    margin: 15px auto;
+    display: inline-block;
+    background: #ff4d6d;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-btn:hover {
+    background: #ff758f;
+}
+
+/* CONTAINER */
+.container {
+    padding: 20px;
+}
+
+/* PRODUCTS GRID 4'LÜ */
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* BUTTON */
+button {
+    background: linear-gradient(45deg, #ff4d6d, #ff758f);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* SECTIONS */
+.section { display: none; }
+.active { display: block; }
+
+/* CART */
+.cart-drawer {
+    position: fixed;
+    right: -320px;
+    top: 0;
+    width: 320px;
+    height: 100%;
+    background: white;
+    box-shadow: -3px 0 15px rgba(0,0,0,0.2);
+    padding: 20px;
+    transition: 0.3s;
+    text-align: left;
+}
+
+.cart-drawer.open {
+    right: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.card img {
+    width: 100%;
+    height: 200px; /* tüm görseller aynı yükseklik */
+    object-fit: cover; /* görsel orantısını korur ve taşmayı engeller */
+    border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    🌸 Kılıç Çiçekçilik
+</header>
+
+<nav>
+    <a onclick="showSection('home')">Ana Sayfa</a>
+    <a onclick="showSection('products')">Ürünler</a>
+    <a onclick="showSection('about')">Hakkımızda</a>
+    <a onclick="showSection('blog')">Blog</a>
+</nav>
+
+<div class="cart-btn" onclick="toggleCart()">🛒 Sepeti Aç</div>
+
+<!-- CART -->
+<div id="cart" class="cart-drawer">
+    <h3>Sepet</h3>
+    <div id="cartList"></div>
+    <div class="total">Toplam: ₺<span id="total">0</span></div>
+</div>
+
+<div class="container">
+
+<!-- ANA SAYFA -->
+<div id="home" class="section active">
+    <h2>Hoşgeldiniz 🌷</h2>
+    <p>Sevdiklerinize çiçek gönderin 💐</p>
+</div>
+
+<!-- ÜRÜNLER -->
+<div id="products" class="section">
+    <h2>Ürünler</h2>
+
+    <div class="products">
+
+        <div class="card"><img src="gül.jpg"><h3>Gül</h3><p>₺250</p><button onclick="addToCart('Gül',250)">Sepete Ekle</button></div>
+        <div class="card"><img src="4-dalli-beyaz-orkide.png"><h3>Orkide</h3><p>₺300</p><button onclick="addToCart('Orkide',300)">Sepete Ekle</button></div>
+        <div class="card"><img src="lilyum.png"><h3>Lilyum</h3><p>₺200</p><button onclick="addToCart('Lilyum',200)">Sepete Ekle</button></div>
+        <div class="card"><img src="papatya-cicegi-tohumu.jpg"><h3>Papatya</h3><p>₺150</p><button onclick="addToCart('Papatya',150)">Sepete Ekle</button></div>
+        <div class="card"><img src="karamfil.png"><h3>Karanfil</h3><p>₺180</p><button onclick="addToCart('Karanfil',180)">Sepete Ekle</button></div>
+        <div class="card"><img src="lale.png"><h3>Lale</h3><p>₺220</p><button onclick="addToCart('Lale',220)">Sepete Ekle</button></div>
+          <div class="card"><img src="BEGOMYA.webp"><h3>Begonya</h3><p>₺750</p><button onclick="addToCart('Begonya',750)">Sepete Ekle</button></div>
+  <div class="card"><img src="sakura-spring-story-864x1080-01.jpg"><h3>Sakura</h3><p>₺550</p><button onclick="addToCart('Sakura',550)">Sepete Ekle</button></div>
+ 
+</div>
+
+<!-- HAKKIMIZDA -->
+<div id="about" class="section">
+    <h2>Hakkımızda</h2>
+    <p>ben sitenin ve şirketin sahibi  Yusuf Kılıç <br>
+        Türkiyenin en büyük çiçek firması olma yolunda<br>
+         birlikte ilerleyeceğiz 🌸</p>
+</div>
+
+<!-- BLOG -->
+<div id="blog" class="section">
+    <h2>Blog</h2>
+    <p>Yakında içerikler eklenecek</p>
+</div>
+
+</div>
+
+<script>
+let total = 0;
+
+function showSection(id) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+function addToCart(name, price) {
+    const div = document.createElement("div");
+    div.className = "cart-item";
+    div.innerHTML = `<span>${name}</span><span>₺${price}</span>`;
+    document.getElementById("cartList").appendChild(div);
+
+    total += price;
+    document.getElementById("total").innerText = total;
+
+    document.getElementById("cart").classList.add("open");
+}
+
+function toggleCart() {
+    document.getElementById("cart").classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
